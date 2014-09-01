@@ -183,14 +183,24 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-#appHeader {
-    height: 2em;
+#appHeader, 
+#appFooter {
     background-color: black;
+    display: table;
     color: white;
-    font-size: 1em;
-    line-height: 2em;
+    font-size: 1.5em;
     text-align: center;
     font-weight: bold;
+    height: 3em;
+    width: 100%;
+}
+
+#appHeader h1,
+#appFooter p {
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+    font-size: 1em; 
 }
 
 #zipOrTrack {
@@ -214,6 +224,7 @@ body {
     color: #005502;
     text-align: center;
     height: 1.6em;
+    max-width: 10em;
 }
 
 #zipOrTrack > div > span {
@@ -240,7 +251,7 @@ body {
 #results {
     background-color: #CCFFBB;
     width: 100%;
-    min-height: 10em;
+    min-height: 15em;
     display: table;
 }
 
@@ -259,12 +270,14 @@ body {
 }
 
 #searchResults {
-    margin: 2em 5%;
+    margin: 2em auto;
     background-color: #fff;
     border-radius: .25em;
     -moz-border-radius: 0.25em;
     -webkit-border-radius: 0.25em;
     padding: 0 1em;
+    width: 90%;
+    max-width: 80em;
 }
 
 #searchResults > a {
@@ -279,6 +292,28 @@ body {
 
 #searchResults > a:first-child {
     border-top: none;
+}
+
+#blankResults {
+    display: table-cell;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 3em;
+    color: #005502;
+    font-weight: bold;
+}
+
+@media only screen and (min-width: 1400px) {
+
+    #results {
+        min-height: 25.7em;
+    }
+
+    #zipOrTrack {
+        height: 25em;
+    }
+
 }
 
 
