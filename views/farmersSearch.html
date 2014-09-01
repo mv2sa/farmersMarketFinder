@@ -1,2 +1,12 @@
-<div id="placeDetail" ng-if="search.loading">
+<div id="zipOrTrack">
+    <input type="number" ngMaxlength="5" ng-model="search.zip" /> &mdash; OR &mdash; <a href="" ng-click="getCoords();">Get my position</a>
+</div>
+<div id="loadingSearch" ng-if="search.loading">
+    <p class="loading">
+    </p>
+</div>
+<div id="searchResults" ng-if="search.results">
+    <a href="" ng-repeat="results in search.results">
+    {{ results.marketname }}
+    </a>
 </div>
