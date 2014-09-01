@@ -57,8 +57,99 @@ textarea {
 }
 
 /* ==========================================================================
-   Know Web Styles
+   Farmers Market Locator Styles
    ========================================================================== */
+
+/* ==========================================================================
+    KEYFRAMES STYLES
+========================================================================== */
+
+@-moz-keyframes spin {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
+}
+@-webkit-keyframes spin {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+/* ==========================================================================
+    font-faces
+========================================================================== */
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/Open_Sans/opensans-regular-webfont.eot');
+    src: url('../fonts/Open_Sans/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Open_Sans/opensans-regular-webfont.woff') format('woff'),
+         url('../fonts/Open_Sans/opensans-regular-webfont.ttf') format('truetype'),
+         url('../fonts/Open_Sans/opensans-regular-webfont.svg#open_sansregular') format('svg');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/Open_Sans/opensans-bold-webfont.eot');
+    src: url('../fonts/Open_Sans/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Open_Sans/opensans-bold-webfont.woff') format('woff'),
+         url('../fonts/Open_Sans/opensans-bold-webfont.ttf') format('truetype'),
+         url('../fonts/Open_Sans/opensans-bold-webfont.svg#open_sansbold') format('svg');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/Open_Sans/opensans-italic-webfont.eot');
+    src: url('../fonts/Open_Sans/opensans-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Open_Sans/opensans-italic-webfont.woff') format('woff'),
+         url('../fonts/Open_Sans/opensans-italic-webfont.ttf') format('truetype'),
+         url('../fonts/Open_Sans/opensans-italic-webfont.svg#open_sansitalic') format('svg');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: 700;
+    src: url('../fonts/Open_Sans/opensans-bolditalic-webfont.eot');
+    src: url('../fonts/Open_Sans/opensans-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Open_Sans/opensans-bolditalic-webfont.woff') format('woff'),
+         url('../fonts/Open_Sans/opensans-bolditalic-webfont.ttf') format('truetype'),
+         url('../fonts/Open_Sans/opensans-bolditalic-webfont.svg#open_sansbold_italic') format('svg');
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.1.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ==========================================================================
+    styles
+========================================================================== */
+
+*, 
+*:before, 
+*:after {
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 
 /* ==========================================================================
