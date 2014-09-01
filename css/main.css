@@ -181,6 +181,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #000;
 }
 
 #appHeader, 
@@ -278,9 +279,10 @@ body {
     padding: 0 1em;
     width: 90%;
     max-width: 80em;
+    border: 1px solid #005502;
 }
 
-#searchResults > a {
+#searchResults > .result {
     display: block;
     text-align: center;
     text-decoration: none;
@@ -290,11 +292,11 @@ body {
     color: #005502;
 }
 
-#searchResults > a > span {
+#searchResults > .result > span {
     color: #fa4600;
 }
 
-#searchResults > a:first-child {
+#searchResults > .result:first-child {
     border-top: none;
 }
 
@@ -303,9 +305,15 @@ body {
     width: 100%;
     text-align: center;
     vertical-align: middle;
-    font-size: 3em;
+    font-size: 1.5em;
     color: #005502;
     font-weight: bold;
+    padding: 0 1em;
+}
+
+#resultDetail {
+    min-height: 20em;
+    background-color: #CCFFBB; 
 }
 
 @media only screen and (min-width: 1400px) {

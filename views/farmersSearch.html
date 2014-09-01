@@ -1,19 +1,22 @@
 <div id="zipOrTrack">
     <div>
-        <input type="number" ngMaxlength="5" ng-model="search.zip" placeholder="Zip Code" class="test" /> <span>&mdash; OR &mdash;</span> <a href="" ng-click="getCoords();">Get my position</a>
+        <input type="text" pattern="\d*" ngMaxlength="5" ng-model="search.zip" placeholder="Zip Code" /> <span>&mdash; OR &mdash;</span> <a href="" ng-click="getCoords();">Get my position</a>
     </div>
 </div>
 <div id="results">
     <div id="blankResults" ng-if="!search.loading && !search.results">
-        No results
+        Please, enter your 5 digit zip code or click on "Get my position"
     </div>
     <div id="loadingSearch" ng-if="search.loading">
         <p class="loading">
         </p>
     </div>
-    <div id="searchResults" ng-if="search.results">
-        <a href="" ng-repeat="results in search.results">
+    <div id="searchResults" ng-if="search.results && !search.loading">
+        <a ng-href="#/farmersMarket/{{ results.id }}" ng-repeat="results in search.results" ng-if="results.id !== 'Error'" class="result">
             {{ results.marketname }}<span> | {{ results.distance }}</span>
+        </a>
+        <div ng-if="search.results[0].id === 'Error'" class="result">
+            <span>{{ search.results[0].id }} | </span>{{ search.results[0].marketname }}
         </a>
     </div>
 </div>

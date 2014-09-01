@@ -4,6 +4,9 @@ app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl: 'views/farmersSearch.html',
     	controller: 'search'
+	}).when('/farmersMarket/:marketId', {
+    	templateUrl: 'views/farmersDetails.html',
+    	controller: 'details'
 	}).otherwise({redirectTo:'/'});
 }]);
 
@@ -29,7 +32,7 @@ app.controller('search', function($scope, farmersMarketFactory) {
 
 	var trackZip = function() {
 		if ($scope.search.zip) {
-			if ($scope.search.zip.toString().length === 5) {
+			if ($scope.search.zip.length === 5) {
 				$scope.search.loading = true;
 				farmersMarketFactory.getMarketDataByZip($scope.search.zip).then(function(d){
 					$scope.search.results = d.results;
@@ -63,35 +66,61 @@ app.controller('search', function($scope, farmersMarketFactory) {
 	init();
 });
 
+app.controller('details', function($scope, $window, $routeParams, farmersMarketFactory) {
+	$scope.id = $routeParams.marketId;
+	$scope.loading = true;
+	$scope.details = false;
+
+	$scope.goBack = function() {
+		$window.history.back();
+	};
+
+	var init = function() {
+		farmersMarketFactory.getMarketDetails($scope.id).then(function(d){
+			$scope.details = d.marketdetails;
+			$scope.loading = false;
+			console.log($scope.details);
+		});
+	};
+
+	init();
+});
+
 app.factory('farmersMarketFactory', function($http) {
 
 	var factory = {};
 
-	factory.getMarketDataByZip = function(zip) {
-		var promise = $http.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip).then(function (results) {
-			var str1, str2, str3;
-			for (var i=0; i < results.data.results.length; i++) {
-				str1 = results.data.results[i].marketname;
+	var processData = function(dataArr) {
+		var str1, str2, str3;
+		if (dataArr.results[0].id !== "Error") {
+			for (var i=0; i < dataArr.results.length; i++) {
+				str1 = dataArr.results[i].marketname;
 				str2 = str1.substr(0,str1.indexOf(' ')) + " miles ",
 				str3 = str1.substr(str1.indexOf(' ')+1);
-				results.data.results[i].marketname = str3;
-				results.data.results[i].distance = str2;
+				dataArr.results[i].marketname = str3;
+				dataArr.results[i].distance = str2;
 			}
-			return results.data;
+		}
+
+		return dataArr;
+	}
+
+	factory.getMarketDataByZip = function(zip) {
+		var promise = $http.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip).then(function (results) {
+			return processData(results.data);
 		});
 		return promise;
 	};
 
 	factory.getMarketDataByCoords = function(coords) {
 		var promise = $http.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=' + coords[0] + '&lng=' + coords[1]).then(function (results) {
-			var str1, str2, str3;
-			for (var i=0; i < results.data.results.length; i++) {
-				str1 = results.data.results[i].marketname;
-				str2 = str1.substr(0,str1.indexOf(' ')) + " miles ",
-				str3 = str1.substr(str1.indexOf(' ')+1);
-				results.data.results[i].marketname = str3;
-				results.data.results[i].distance = str2;
-			}
+			return processData(results.data);
+		});
+		return promise;
+	};
+
+	factory.getMarketDetails = function(id) {
+		var promise = $http.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id).then(function (results) {
 			return results.data;
 		});
 		return promise;
