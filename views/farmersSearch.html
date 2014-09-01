@@ -3,12 +3,14 @@
         <input type="number" ngMaxlength="5" ng-model="search.zip" placeholder="Zip Code" class="test" /> <span>&mdash; OR &mdash;</span> <a href="" ng-click="getCoords();">Get my position</a>
     </div>
 </div>
-<div id="loadingSearch" ng-if="search.loading">
-    <p class="loading">
-    </p>
-</div>
-<div id="searchResults" ng-if="search.results">
-    <a href="" ng-repeat="results in search.results">
-    {{ results.marketname }}
-    </a>
+<div id="results" ng-if="search.loading || search.results">
+    <div id="loadingSearch" ng-if="search.loading">
+        <p class="loading">
+        </p>
+    </div>
+    <div id="searchResults" ng-if="search.results">
+        <a href="" ng-repeat="results in search.results">
+        {{ results.marketname }}
+        </a>
+    </div>
 </div>

@@ -237,10 +237,48 @@ body {
     font-weight: bold;
 }
 
+#results {
+    background-color: #CCFFBB;
+    width: 100%;
+    min-height: 10em;
+    display: table;
+}
+
+#results #loadingSearch {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    color: #005502;
+}
+
 .loading {
     display: inline-block;
     vertical-align: middle;
     font-size: 2em;
+}
+
+#searchResults {
+    margin: 2em 5%;
+    background-color: #fff;
+    border-radius: .25em;
+    -moz-border-radius: 0.25em;
+    -webkit-border-radius: 0.25em;
+    padding: 0 1em;
+}
+
+#searchResults > a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    border-top: 2px solid #005502;
+    padding: 0.5em 0;
+    font-weight: bold;
+    color: #005502;
+}
+
+#searchResults > a:first-child {
+    border-top: none;
 }
 
 
