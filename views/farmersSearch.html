@@ -1,5 +1,7 @@
 <div id="zipOrTrack">
-    <input type="number" ngMaxlength="5" ng-model="search.zip" /> &mdash; OR &mdash; <a href="" ng-click="getCoords();">Get my position</a>
+    <div>
+        <input type="number" ngMaxlength="5" ng-model="search.zip" placeholder="Zip Code" class="test" /> <span>&mdash; OR &mdash;</span> <a href="" ng-click="getCoords();">Get my position</a>
+    </div>
 </div>
 <div id="loadingSearch" ng-if="search.loading">
     <p class="loading">

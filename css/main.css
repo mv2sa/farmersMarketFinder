@@ -56,6 +56,38 @@ textarea {
     padding: 0.2em 0;
 }
 
+[placeholder]:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+input:focus::-moz-placeholder {
+    color: transparent;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+html ::-webkit-input-placeholder {
+    color: inherit;
+}
+
+html :-moz-placeholder {
+    color: inherit;
+    opacity: 1;
+}
+
+html ::-moz-placeholder {
+    color: inherit;
+    opacity: 1;
+}
+
+html :-ms-input-placeholder {
+    color: inherit;
+    opacity: 1;
+}
+
+
 /* ==========================================================================
    Farmers Market Locator Styles
    ========================================================================== */
@@ -158,6 +190,50 @@ body {
     font-size: 1em;
     line-height: 2em;
     text-align: center;
+    font-weight: bold;
+}
+
+#zipOrTrack {
+    height: 20em;
+    background-color: #005502;
+    display: table;
+    width: 100%;
+}
+
+#zipOrTrack > div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 2em;
+}
+
+#zipOrTrack > div > input {
+    width: 90%;
+    margin: 0 5%;
+    background-color: #CCFFBB;
+    color: #005502;
+    text-align: center;
+    height: 1.6em;
+}
+
+#zipOrTrack > div > span {
+    font-weight: bold;
+    color: #fff;
+    display: block;
+    padding: 1em 0;
+}
+
+#zipOrTrack > div > a {
+    display: inline-block;
+    background-color: #CCFFBA;
+    padding: 0 0.5em;
+    line-height: 1.6em;
+    text-decoration: none;
+    border-radius: .25em;
+    -moz-border-radius: 0.25em;
+    -webkit-border-radius: 0.25em;
+    color: #005502;
+    border: 3px #fff solid;
     font-weight: bold;
 }
 

@@ -11,29 +11,52 @@ app.controller('search', function($scope, farmersMarketFactory) {
 	$scope.search = {
 		zip : null,
 		coords : null,
-		loading : true,
+		loading : false,
 		results : null
 	};
 
-	var init = function() {
+	$scope.getCoords = function() {
 		if (Modernizr.geolocation) {
 			navigator.geolocation.getCurrentPosition(function (position) {
-				$scope.coords = [
+				$scope.search.coords = [
 					position.coords.latitude,
 					position.coords.longitude
 				];
-				farmersMarketFactory.getMarketDataByCoords($scope.coords).then(function(d){
-					$scope.loading = false;
-					$scope.results = d;
-				});
+				$scope.$digest();
 			});
 		}
-		$scope.$watch('zip', function() {
-			$scope.loading = true;
-			farmersMarketFactory.getMarketDataByZip($scope.zip).then(function(d){
-				$scope.loading = false;
-				$scope.results = d;
+	};
+
+	var trackZip = function() {
+		if ($scope.search.zip) {
+			if ($scope.search.zip.toString().length === 5) {
+				$scope.search.loading = true;
+				farmersMarketFactory.getMarketDataByZip($scope.search.zip).then(function(d){
+					$scope.search.results = d.results;
+					$scope.search.loading = false;
+					console.log($scope.search);
+				});
+			}
+		}
+	};
+
+	var trackCoords = function() {
+		if ($scope.search.coords) {
+			$scope.search.loading = true;
+			farmersMarketFactory.getMarketDataByCoords($scope.search.coords).then(function(d){
+				$scope.search.results = d.results;
+				$scope.search.loading = false;
+				console.log($scope.search);
 			});
+		}
+	};
+
+	var init = function() {
+		$scope.$watch('search.zip', function() {
+			trackZip();
+		});
+		$scope.$watch('search.coords', function() {
+			trackCoords();
 		});
 	};
 
@@ -46,7 +69,6 @@ app.factory('farmersMarketFactory', function($http) {
 
 	factory.getMarketDataByZip = function(zip) {
 		var promise = $http.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip).then(function (results) {
-			console.log(results.data);
 			return results.data;
 		});
 		return promise;
@@ -54,7 +76,6 @@ app.factory('farmersMarketFactory', function($http) {
 
 	factory.getMarketDataByCoords = function(coords) {
 		var promise = $http.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=' + coords[0] + '&lng=' + coords[1]).then(function (results) {
-			console.log(results.data);
 			return results.data;
 		});
 		return promise;
