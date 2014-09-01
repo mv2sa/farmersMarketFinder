@@ -290,6 +290,10 @@ body {
     color: #005502;
 }
 
+#searchResults > a > span {
+    color: #fa4600;
+}
+
 #searchResults > a:first-child {
     border-top: none;
 }

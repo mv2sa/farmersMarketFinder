@@ -69,6 +69,14 @@ app.factory('farmersMarketFactory', function($http) {
 
 	factory.getMarketDataByZip = function(zip) {
 		var promise = $http.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip).then(function (results) {
+			var str1, str2, str3;
+			for (var i=0; i < results.data.results.length; i++) {
+				str1 = results.data.results[i].marketname;
+				str2 = str1.substr(0,str1.indexOf(' ')) + " miles ",
+				str3 = str1.substr(str1.indexOf(' ')+1);
+				results.data.results[i].marketname = str3;
+				results.data.results[i].distance = str2;
+			}
 			return results.data;
 		});
 		return promise;
@@ -76,6 +84,14 @@ app.factory('farmersMarketFactory', function($http) {
 
 	factory.getMarketDataByCoords = function(coords) {
 		var promise = $http.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=' + coords[0] + '&lng=' + coords[1]).then(function (results) {
+			var str1, str2, str3;
+			for (var i=0; i < results.data.results.length; i++) {
+				str1 = results.data.results[i].marketname;
+				str2 = str1.substr(0,str1.indexOf(' ')) + " miles ",
+				str3 = str1.substr(str1.indexOf(' ')+1);
+				results.data.results[i].marketname = str3;
+				results.data.results[i].distance = str2;
+			}
 			return results.data;
 		});
 		return promise;
