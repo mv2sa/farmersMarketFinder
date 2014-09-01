@@ -1,15 +1,17 @@
 <div id="resultDetail">
-    <a href="" ng-click="goBack()">
-        Go Back
-    </a>
-    <div id="loadingDetail" ng-if="loading">
-        <p class="loading">
-        </p>
-    </div>
-    <div id="resultData" ng-if="details && !loading">
-        {{ details.Address }}
-        {{ details.GoogleLink }}
-        {{ details.Products }}
-        {{ details.Schedule }}
+    <div>
+        <a href="#/" class="back">
+            Go Back
+        </a>
+        <div id="loadingDetail" ng-if="loading">
+            <p class="loading">
+            </p>
+        </div>
+        <div id="resultData" ng-if="details && !loading">
+            <h2>{{ marketName }}</h2>
+            <iframe ng-src="{{ details.GoogleMaps | urlSafe }}" id="detailMap"></iframe>
+            {{ details.Products }}
+            {{ details.Schedule }}
+        </div>
     </div>
 </div>

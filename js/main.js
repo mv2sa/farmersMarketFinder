@@ -1,10 +1,10 @@
-var app = angular.module('farmersMarket', ['ngRoute']);
+var app = angular.module('farmersMarket', ['ngRoute', 'filters']);
 
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl: 'views/farmersSearch.html',
     	controller: 'search'
-	}).when('/farmersMarket/:marketId', {
+	}).when('/farmersMarket/:marketId/:marketName', {
     	templateUrl: 'views/farmersDetails.html',
     	controller: 'details'
 	}).otherwise({redirectTo:'/'});
@@ -66,18 +66,16 @@ app.controller('search', function($scope, farmersMarketFactory) {
 	init();
 });
 
-app.controller('details', function($scope, $window, $routeParams, farmersMarketFactory) {
-	$scope.id = $routeParams.marketId;
+app.controller('details', function($scope, $routeParams, farmersMarketFactory) {
+	$scope.marketId = $routeParams.marketId;
+	$scope.marketName = $routeParams.marketName;
 	$scope.loading = true;
 	$scope.details = false;
 
-	$scope.goBack = function() {
-		$window.history.back();
-	};
-
 	var init = function() {
-		farmersMarketFactory.getMarketDetails($scope.id).then(function(d){
+		farmersMarketFactory.getMarketDetails($scope.marketId).then(function(d){
 			$scope.details = d.marketdetails;
+			$scope.details.GoogleMaps = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyA4OFKbHnw9Ks7vW14ULE4xIQuFk4B6Fs4&zoom=11&q=' + encodeURIComponent($scope.details.Address);
 			$scope.loading = false;
 			console.log($scope.details);
 		});
@@ -98,6 +96,7 @@ app.factory('farmersMarketFactory', function($http) {
 				str2 = str1.substr(0,str1.indexOf(' ')) + " miles ",
 				str3 = str1.substr(str1.indexOf(' ')+1);
 				dataArr.results[i].marketname = str3;
+				dataArr.results[i].marketnameEncoded = encodeURIComponent(str3);
 				dataArr.results[i].distance = str2;
 			}
 		}
@@ -128,3 +127,20 @@ app.factory('farmersMarketFactory', function($http) {
 
 	return factory;
 });
+
+angular.module('filters', [])
+	.filter('urlSafe', ['$sce', function ($sce) {
+		return function (input) {
+			if (input) {
+				return $sce.trustAsResourceUrl(input);
+			}
+		};
+	}]
+).filter('toHTML', ['$sce', function ($sce) {
+		return function (input) {
+			if (input) {
+				return $sce.trustAsHtml(input);
+			}
+		};
+	}]
+);

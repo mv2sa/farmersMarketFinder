@@ -12,7 +12,7 @@
         </p>
     </div>
     <div id="searchResults" ng-if="search.results && !search.loading">
-        <a ng-href="#/farmersMarket/{{ results.id }}" ng-repeat="results in search.results" ng-if="results.id !== 'Error'" class="result">
+        <a ng-href="#/farmersMarket/{{ results.id }}/{{ results.marketnameEncoded }}" ng-repeat="results in search.results" ng-if="results.id !== 'Error'" class="result">
             {{ results.marketname }}<span> | {{ results.distance }}</span>
         </a>
         <div ng-if="search.results[0].id === 'Error'" class="result">
