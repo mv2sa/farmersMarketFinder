@@ -313,6 +313,7 @@ body {
 
 #resultDetail {
     background-color: #CCFFBB; 
+    text-align: center;
 }
 
 #resultDetail > div {
@@ -338,7 +339,6 @@ body {
 }
 
 #resultDetail h2 {
-    text-align: center;
     color: #005502;
 }
 
@@ -349,6 +349,19 @@ body {
     height: 20em;
     margin: 0 auto 1em;
     border: 1px dashed #005502;
+}
+
+#resultDetail h3 {
+    color: #005502;
+}
+
+#resultDetail ul {
+    margin: 0;
+    padding: 0;
+}
+
+#resultDetail ul li {
+    list-style: none;
 }
 
 

@@ -128,19 +128,39 @@ app.factory('farmersMarketFactory', function($http) {
 	return factory;
 });
 
-angular.module('filters', [])
-	.filter('urlSafe', ['$sce', function ($sce) {
-		return function (input) {
-			if (input) {
-				return $sce.trustAsResourceUrl(input);
+angular.module('filters', []).filter('semicolonToList', function () {
+	return function (input) {
+		if (input) {
+			return '<ul><li>' + input.replace(/;/g,'</li><li>') + '</li></ul>';
+		}
+	};
+}).filter('semicolonToSpace', function () {
+	return function (input) {
+		if (input) {
+			return input.replace(/;/g,' ');
+		}
+	};
+}).filter('breakBeforeWeekDay', function () {
+	return function (input) {
+		var weekDays = ['Sun:', 'Mon:', 'Tue:', 'Wed:', 'Thu:', 'Fri:', 'Sat:'], re;
+		if (input) {
+			for (var i=0;i < weekDays.length;i++) {
+				re = new RegExp(weekDays[i], "g");
+				input = input.replace(re,'<br />' + weekDays[i]);
 			}
-		};
-	}]
-).filter('toHTML', ['$sce', function ($sce) {
-		return function (input) {
-			if (input) {
-				return $sce.trustAsHtml(input);
-			}
-		};
-	}]
-);
+			return input;
+		}
+	};
+}).filter('urlSafe', ['$sce', function ($sce) {
+	return function (input) {
+		if (input) {
+			return $sce.trustAsResourceUrl(input);
+		}
+	};
+}]).filter('toHTML', ['$sce', function ($sce) {
+	return function (input) {
+		if (input) {
+			return $sce.trustAsHtml(input);
+		}
+	};
+}]);

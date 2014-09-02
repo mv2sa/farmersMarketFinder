@@ -10,8 +10,14 @@
         <div id="resultData" ng-if="details && !loading">
             <h2>{{ marketName }}</h2>
             <iframe ng-src="{{ details.GoogleMaps | urlSafe }}" id="detailMap"></iframe>
-            {{ details.Products }}
-            {{ details.Schedule }}
+            <div>
+                <h3>Products:</h3>
+                <div ng-bind-html="details.Products | semicolonToList | toHTML"></div>
+            </div>
+            <div>
+                <h3>Time and date open:</h3>
+                <div ng-bind-html="details.Schedule | semicolonToSpace | breakBeforeWeekDay | toHTML"></div>
+            </div>
         </div>
     </div>
 </div>
