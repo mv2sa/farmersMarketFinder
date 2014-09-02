@@ -221,7 +221,7 @@ body {
 #zipOrTrack > div > input {
     width: 90%;
     margin: 0 5%;
-    background-color: #CCFFBB;
+    background-color: #fff;
     color: #005502;
     text-align: center;
     height: 1.6em;
@@ -237,7 +237,7 @@ body {
 
 #zipOrTrack > div > a {
     display: inline-block;
-    background-color: #CCFFBA;
+    background-color: #fff;
     padding: 0 0.5em;
     line-height: 1.6em;
     text-decoration: none;
@@ -245,12 +245,12 @@ body {
     -moz-border-radius: 0.25em;
     -webkit-border-radius: 0.25em;
     color: #005502;
-    border: 3px #fff solid;
+    border: 3px #CCFFBA solid;
     font-weight: bold;
 }
 
 #results {
-    background-color: #CCFFBB;
+    background-color: #fff;
     width: 100%;
     min-height: 15em;
     display: table;
@@ -272,7 +272,7 @@ body {
 
 #searchResults {
     margin: 2em auto;
-    background-color: #fff;
+    background-color: #CCFFBA;
     border-radius: 0.25em;
     -moz-border-radius: 0.25em;
     -webkit-border-radius: 0.25em;
