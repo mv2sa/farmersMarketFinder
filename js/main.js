@@ -75,7 +75,7 @@ app.controller('details', function($scope, $routeParams, farmersMarketFactory) {
 	var init = function() {
 		farmersMarketFactory.getMarketDetails($scope.marketId).then(function(d){
 			$scope.details = d.marketdetails;
-			$scope.details.GoogleMaps = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyA4OFKbHnw9Ks7vW14ULE4xIQuFk4B6Fs4&zoom=11&q=' + encodeURIComponent($scope.details.Address);
+			$scope.details.GoogleMaps = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyA4OFKbHnw9Ks7vW14ULE4xIQuFk4B6Fs4&zoom=11&q=' + encodeURIComponent($scope.details.Address.replace(/ *\([^)]*\) */g, ""));
 			$scope.loading = false;
 			console.log($scope.details);
 		});
@@ -151,7 +151,13 @@ angular.module('filters', []).filter('semicolonToList', function () {
 			return input;
 		}
 	};
-}).filter('urlSafe', ['$sce', function ($sce) {
+}).filter('removeParenthesis', ['$sce', function ($sce) {
+	return function (input) {
+		if (input) {
+			return input.replace(/ *\([^)]*\) */g, "");
+		}
+	};
+}]).filter('urlSafe', ['$sce', function ($sce) {
 	return function (input) {
 		if (input) {
 			return $sce.trustAsResourceUrl(input);
