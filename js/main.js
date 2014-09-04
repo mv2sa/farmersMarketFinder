@@ -151,13 +151,13 @@ angular.module('filters', []).filter('semicolonToList', function () {
 			return input;
 		}
 	};
-}).filter('removeParenthesis', ['$sce', function ($sce) {
+}).filter('removeParenthesis', function ($sce) {
 	return function (input) {
 		if (input) {
 			return input.replace(/ *\([^)]*\) */g, "");
 		}
 	};
-}]).filter('urlSafe', ['$sce', function ($sce) {
+}).filter('urlSafe', ['$sce', function ($sce) {
 	return function (input) {
 		if (input) {
 			return $sce.trustAsResourceUrl(input);
