@@ -204,6 +204,10 @@ body {
     font-size: 1em; 
 }
 
+#appFooter p a {
+    color: inherit;
+}
+
 #zipOrTrack {
     height: 20em;
     background-color: #005502;
